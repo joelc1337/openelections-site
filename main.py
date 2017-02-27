@@ -47,9 +47,19 @@ class UploadHandler(webapp2.RequestHandler):
         precinct_to_votes = csv_string_to_dict(csv_data)
         for key in precinct_to_votes:
             entry = precinct_to_votes[key]
-            precinct_id = precinct_to_votes['county'] + '__' + precinct_to_votes['precinct']
-            # TODO: create PrecinctVotes objects (set id, county, percinct, & votes)
+            precinct_id = precinct_to_votes[key]['county'] + '__' + precinct_to_votes[key]['precinct']
+            # TODO: create PrecinctVotes objects (set id, county, precinct, & votes)
             # and save with .put()
+
+            Pre1 = PrecinctVotes(
+                id = precinct_id,
+                county = "New York",
+                precinct = "025/72" ,
+                votes = 5,
+            )
+            Pre1.put()
+
+
         self.response.out.write('Upload successful')
 
 class PrecinctHandler(webapp2.RequestHandler):
